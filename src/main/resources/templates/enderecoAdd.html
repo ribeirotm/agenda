@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Cadastro de Endereço</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <link th:href="@{/css/extra.css}" href="/css/extra.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <strong class="titulo">Cadastro de Endereço</strong>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" th:object="${endereco}" th:action="@{/endereco/save}" method="POST" style="margin: 10px">
+                        <div class="form-group">
+                            <fieldset>
+                                <div class="form-group row">
+                                    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                                        <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                            <span th:text="${detailedError.message}"></span>
+                                        </div>
+                                    </div>
+                                </div> 	
+                                <div class="form-group row">
+                                    <div class="col-md-1">
+                                        <input type="text" class="form-control input-sm" id="id" th:field="*{idEndereco}" readOnly="readonly"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">                                                          
+                                    <div class="col-md-4" th:classappend="${#fields.hasErrors('enderecoReal')}? 'has-error'">
+                                        <label>Endereço</label>
+                                        <input type="text" class="form-control input-sm" th:field="*{enderecoReal}" autofocus="autofocus" maxlength="50"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4" th:classappend="${#fields.hasErrors('numero')}? 'has-error'">
+                                        <label>Número</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{numero}" maxlength="10"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2" th:classappend="${#fields.hasErrors('complemento')}? 'has-error'">
+                                        <label>Complemento</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{complemento}" maxlength="50"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2" th:classappend="${#fields.hasErrors('bairro')}? 'has-error'">
+                                        <label>Bairro</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{bairro}" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2" th:classappend="${#fields.hasErrors('cidade')}? 'has-error'">
+                                        <label>Cidade</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{cidade}" maxlength="100"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2" th:classappend="${#fields.hasErrors('uf')}? 'has-error'">
+                                        <label>UF</label> 
+                                        <select th:field="*{uf}" class="form-control input-sm">
+                                            <option th:value="AC" th:text="Acre"></option>
+                                            <option th:value="AL" th:text="Alagoas"></option>
+                                            <option th:value="AM" th:text="Amazonas"></option>
+                                            <option th:value="AP" th:text="Amapá"></option>
+                                            <option th:value="BA" th:text="Bahia"></option>
+                                            <option th:value="CE" th:text="Ceará"></option>
+                                            <option th:value="DF" th:text="'Distrito Federal'"></option>
+                                            <option th:value="ES" th:text="'Espírito Santo'"></option>
+                                            <option th:value="GO" th:text="Goiás"></option>
+                                            <option th:value="MA" th:text="Maranhão"></option>
+                                            <option th:value="MG" th:text="'Minas Gerais'"></option>
+                                            <option th:value="MS" th:text="'Mato Grosso do Sul'"></option>
+                                            <option th:value="MT" th:text="'Mato Grosso'"></option>
+                                            <option th:value="PA" th:text="Pará"></option>
+                                            <option th:value="PB" th:text="Paraíba"></option>
+                                            <option th:value="PE" th:text="Pernambuco"></option>
+                                            <option th:value="PI" th:text="Piauí"></option>
+                                            <option th:value="PR" th:text="Paraná"></option>
+                                            <option th:value="RJ" th:text="'Rio de Janeiro'"></option>
+                                            <option th:value="RN" th:text="'Rio Grande do Norte'"></option>
+                                            <option th:value="RO" th:text="Rondônia"></option>
+                                            <option th:value="RR" th:text="Roraima"></option>
+                                            <option th:value="RS" th:text="'Rio Grande do Sul'"></option>
+                                            <option th:value="SC" th:text="'Santa Catarina'"></option>
+                                            <option th:value="SE" th:text="Sergipe"></option>
+                                            <option th:value="SP" th:text="'São Paulo'"></option>
+                                            <option th:value="TO" th:text="Tocantins"></option>
+                                        </select>
+                                    </div>  
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2" th:classappend="${#fields.hasErrors('tipoEndereco')}? 'has-error'">
+                                        <label>Tipo de Endereço</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{tipoEndereco}" maxlength="10"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2" th:classappend="${#fields.hasErrors('idContato')}? 'has-error'">
+                                        <label>ID do Contato</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{idContato}" maxlength="10"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                            <a th:href="@{/endereco}" class="btn btn-sm btn-default">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

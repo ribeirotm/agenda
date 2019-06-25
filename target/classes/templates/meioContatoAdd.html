@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Cadastro de Contato</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <link th:href="@{/css/extra.css}" href="/css/extra.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <strong class="titulo">Cadastro de Meio Contato</strong>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-horizontal" th:object="${meioContato}" th:action="@{/meioContato/save}" method="POST" style="margin: 10px">
+                        <div class="form-group">
+                            <fieldset>
+                                <div class="form-group row">
+                                    <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+                                        <div th:each="detailedError : ${#fields.detailedErrors()}">
+                                            <span th:text="${detailedError.message}"></span>
+                                        </div>
+                                    </div>
+                                </div> 	
+                                <div class="form-group row">
+                                    <div class="col-md-1">
+                                        <input type="text" class="form-control input-sm" id="id" th:field="*{idMeioContato}" readOnly="readonly"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">                                                          
+                                    <div class="col-md-4" th:classappend="${#fields.hasErrors('tipoContato')}? 'has-error'">
+                                        <label>Tipo de Contato</label>
+                                        <input type="text" class="form-control input-sm" th:field="*{tipoContato}" autofocus="autofocus" maxlength="15"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4" th:classappend="${#fields.hasErrors('conteudo')}? 'has-error'">
+                                        <label>Conteúdo</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{conteudo}" maxlength="150"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-4" th:classappend="${#fields.hasErrors('idContato')}? 'has-error'">
+                                        <label>ID do Contato</label> 
+                                        <input type="text" class="form-control input-sm" th:field="*{idContato}" maxlength="11"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-group row">
+                            <button type="submit" class="btn btn-sm btn-primary">Salvar</button>
+                            <a th:href="@{/meioContato}" class="btn btn-sm btn-default">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

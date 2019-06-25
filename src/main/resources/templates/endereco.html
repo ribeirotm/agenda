@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width"/>
+        <title>Endereços</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.quicksearch/2.3.1/jquery.quicksearch.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet'/>
+        <link th:href="@{/css/extra.css}" href="/css/extra.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <strong class="titulo">Endereços</strong>
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col col-xs-6">    
+                                </div>
+                                <div class="col col-xs-6 text-right">
+                                    <a class="btn btn-sm btn-primary" th:href="@{/endereco/add}">Novo endereço</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table id="tabela" class="table table-striped table-bordered table-list">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Endereço</th>
+                                        <th>Número</th>
+                                        <th>Complemento</th>
+                                        <th>Bairro</th>
+                                        <th>Cidade</th>
+                                        <th>UF</th>
+                                        <th>Tipo de Endereço</th>
+                                        <th>ID do Contato</th>
+                                        <th><em class="fa fa-cog"></em></th>
+                                    </tr> 
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <tr th:each="endereco : ${enderecos}">
+                                            <td th:text="${endereco.idEndereco}"></td>
+                                            <td th:text="${endereco.enderecoReal}"></td>
+                                            <td th:text="${endereco.numero}"></td>    
+                                            <td th:text="${endereco.complemento}"></td>    
+                                            <td th:text="${endereco.bairro}"></td>    
+                                            <td th:text="${endereco.cidade}"></td>    
+                                            <td th:text="${endereco.uf}"></td>    
+                                            <td th:text="${endereco.tipoEndereco}"></td>  
+                                            <td th:text="${endereco.idContato}"></td>       
+                                            <td align="center">
+                                                <a class="btn btn-default" th:href="@{/endereco/edit/{id}(id=${endereco.idEndereco})}"><em class="fa fa-pencil"></em></a>
+                                                <a class="btn btn-danger" th:href="@{/endereco/delete/{id}(id=${endereco.idEndereco})}"><em class="fa fa-trash"></em></a>
+                                            </td>
+                                        </tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        <input name="consulta" id="txt_consulta" placeholder="Pesquisar..." type="text" class="pesquisar form-control"/>
+                    </div>
+                </div></div></div>
+
+        <script th:src="@{/js/consulta.js}" src="/js/consulta.js"></script>
+
+    </body>
+</html>
